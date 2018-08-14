@@ -53,6 +53,7 @@
     </nav>
 
     <div class="container">
+    @include('partials._messages')
          @yield('content')
     <hr>
     <p class="text-center">Copyright TopTen - Sva prava zadržana</p>
