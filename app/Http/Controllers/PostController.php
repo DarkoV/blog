@@ -14,7 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // create a variable and store all the blog posts in it form the database
+        $posts = Post::all();
+
+        //return a view and pass in the above variable
+        return view('posts.index')->withPosts($posts);
     }
 
     /**
@@ -75,6 +79,11 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        // validate data
+        //dd($id);
+        $post=Post::find($id);
+        //dd($post);
+        return view('posts.edit')->withPost($post);
     }
 
     /**
@@ -87,6 +96,12 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //dd($request->all());
+        $post=Post::find($id);
+        $post->title=$request->get('title');
+        $post->body=$request->get('body');
+        $post->save();
+        return redirect()->route('posts.show',$post->id);
     }
 
     /**
